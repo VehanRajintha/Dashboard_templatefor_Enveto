@@ -58,16 +58,7 @@ function calculateSettingAsThemeString({ localStorageTheme }) {
   if (localStorageTheme !== null) {
     return localStorageTheme;
   }
-  return "light"; // default to light theme if nothing is stored
-}
-
-/**
-* Utility function to update the button text and aria-label.
-*/
-function updateButton({ buttonEl, isDark }) {
-  const newCta = isDark ? "dark" : "light";
-  buttonEl.setAttribute("aria-label", newCta);
-  buttonEl.innerText = newCta;
+  return "dark"; // default to dark theme if nothing is stored
 }
 
 /**
@@ -78,38 +69,17 @@ function updateThemeOnHtmlEl({ theme }) {
 }
 
 /**
-* 1. Grab what we need from the DOM and system settings on page load.
+* Set dark theme as default
 */
-const button = document.querySelector("[data-theme-toggle]");
 const localStorageTheme = localStorage.getItem("theme");
-
-/**
-* 2. Work out the current site settings.
-*/
 let currentThemeSetting = calculateSettingAsThemeString({ localStorageTheme });
 
-/**
-* 3. If the button exists, update the theme setting and button text according to current settings.
-*/
-if (button) {
-  updateButton({ buttonEl: button, isDark: currentThemeSetting === "dark" });
-  updateThemeOnHtmlEl({ theme: currentThemeSetting });
+// Always apply dark theme
+updateThemeOnHtmlEl({ theme: currentThemeSetting });
 
-  /**
-  * 4. Add an event listener to toggle the theme.
-  */
-  button.addEventListener("click", (event) => {
-    const newTheme = currentThemeSetting === "dark" ? "light" : "dark";
-
-    localStorage.setItem("theme", newTheme);
-    updateButton({ buttonEl: button, isDark: newTheme === "dark" });
-    updateThemeOnHtmlEl({ theme: newTheme });
-
-    currentThemeSetting = newTheme;
-  });
-} else {
-  // If no button is found, just apply the current theme to the page
-  updateThemeOnHtmlEl({ theme: currentThemeSetting });
+// Set theme in localStorage if not already set
+if (!localStorageTheme) {
+  localStorage.setItem("theme", "dark");
 }
 
 

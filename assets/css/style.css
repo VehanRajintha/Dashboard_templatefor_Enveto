@@ -15191,6 +15191,7 @@ td.fc-header-center {
 }
 .dashboard-main-body {
   padding: 0.9375rem;
+  margin-top: 4.5rem;
 }
 
 @media (min-width: 1400px) {
@@ -15238,7 +15239,6 @@ td.fc-header-center {
 
 /* Enhanced Sidebar Improvements */
 .sidebar {
-  position: relative;
   z-index: 1000;
 }
 

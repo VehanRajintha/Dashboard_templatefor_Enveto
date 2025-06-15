@@ -153,43 +153,13 @@
         }
 
         element.appendChild(circle);
-    }
-
-    /**
+    }    /**
      * Initialize theme enhancements
      */
     function initThemeEnhancements() {
-        // Enhanced theme toggle with smooth transition
-        const themeToggle = document.querySelector('[data-theme-toggle]') || 
-                           document.querySelector('.theme-toggle') ||
-                           document.querySelector('#theme-toggle');
-
-        if (themeToggle) {
-            themeToggle.addEventListener('click', function() {
-                const currentTheme = document.documentElement.getAttribute('data-theme');
-                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                
-                // Add transition class
-                document.body.classList.add('theme-transition');
-                
-                // Change theme
-                document.documentElement.setAttribute('data-theme', newTheme);
-                
-                // Store theme preference
-                localStorage.setItem('theme', newTheme);
-                
-                // Remove transition class after animation
-                setTimeout(() => {
-                    document.body.classList.remove('theme-transition');
-                }, 300);
-                
-                // Add visual feedback
-                this.style.transform = 'scale(0.9)';
-                setTimeout(() => {
-                    this.style.transform = 'scale(1)';
-                }, 150);
-            });
-        }
+        // Ensure dark theme is always applied
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
 
         // Add theme transition CSS
         if (!document.querySelector('#theme-transition-css')) {
