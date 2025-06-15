@@ -1,0 +1,661 @@
+/* ====================================================================
+   VRdash - Modern Glassmorphism & Liquid Glass Effects CSS
+   Enhanced with animations and modern UI patterns
+   ==================================================================== */
+
+/* === Enhanced CSS Variables === */
+:root {
+  /* Glassmorphism variables */
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-bg-secondary: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+  --glass-shadow-hover: 0 12px 40px rgba(31, 38, 135, 0.25);
+  --glass-blur: blur(12px);
+  --glass-blur-strong: blur(20px);
+  
+  /* Liquid glass variables */
+  --liquid-gradient-1: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 100%);
+  --liquid-gradient-2: linear-gradient(45deg, rgba(72, 127, 255, 0.1) 0%, rgba(130, 82, 233, 0.1) 100%);
+  --liquid-gradient-3: linear-gradient(225deg, rgba(255, 159, 41, 0.1) 0%, rgba(239, 71, 112, 0.1) 100%);
+  
+  /* Enhanced animations */
+  --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --transition-fast: all 0.2s ease-in-out;
+  
+  /* Modern spacing and sizing */
+  --spacing-micro: 0.125rem;
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  
+  /* Modern radius values */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+  --radius-full: 9999px;
+}
+
+[data-theme="dark"] {
+  --glass-bg: rgba(0, 0, 0, 0.2);
+  --glass-bg-secondary: rgba(0, 0, 0, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --glass-shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.4);
+  
+  --liquid-gradient-1: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+  --liquid-gradient-2: linear-gradient(45deg, rgba(72, 127, 255, 0.15) 0%, rgba(130, 82, 233, 0.15) 100%);
+  --liquid-gradient-3: linear-gradient(225deg, rgba(255, 159, 41, 0.15) 0%, rgba(239, 71, 112, 0.15) 100%);
+}
+
+/* === Enhanced Body and Base Styles === */
+body {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(120, 219, 226, 0.3) 0%, transparent 50%);
+  z-index: -2;
+  animation: backgroundShift 20s ease-in-out infinite;
+}
+
+[data-theme="dark"] body {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+}
+
+[data-theme="dark"] body::before {
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(72, 127, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(130, 82, 233, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(255, 159, 41, 0.1) 0%, transparent 50%);
+}
+
+@keyframes backgroundShift {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+/* === Enhanced Sidebar with Glassmorphism === */
+.sidebar {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border-right: 1px solid var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
+  transition: var(--transition-smooth) !important;
+}
+
+.sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--liquid-gradient-1);
+  border-radius: inherit;
+  z-index: -1;
+}
+
+.sidebar:hover {
+  box-shadow: var(--glass-shadow-hover) !important;
+  transform: translateX(2px);
+}
+
+/* === Enhanced Sidebar Menu Items === */
+.sidebar-menu li a {
+  background: transparent !important;
+  transition: var(--transition-smooth) !important;
+  border-radius: var(--radius-md) !important;
+  margin: var(--spacing-xs) var(--spacing-sm) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.sidebar-menu li a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--liquid-gradient-2);
+  transition: var(--transition-smooth);
+  z-index: -1;
+}
+
+.sidebar-menu li a:hover {
+  background: var(--glass-bg-secondary) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  transform: translateX(8px) scale(1.02) !important;
+  box-shadow: 0 4px 16px rgba(72, 127, 255, 0.2) !important;
+}
+
+.sidebar-menu li a:hover::before {
+  left: 0;
+}
+
+.sidebar-menu li.active > a {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border: 1px solid var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
+}
+
+/* === Enhanced Cards with Liquid Glass Effects === */
+.card {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: var(--radius-xl) !important;
+  box-shadow: var(--glass-shadow) !important;
+  transition: var(--transition-smooth) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--liquid-gradient-1);
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transition: var(--transition-smooth);
+}
+
+.card:hover {
+  transform: translateY(-4px) scale(1.02) !important;
+  box-shadow: var(--glass-shadow-hover) !important;
+  border-color: rgba(72, 127, 255, 0.3) !important;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+/* === Enhanced Buttons with Modern Animations === */
+.btn {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: var(--radius-lg) !important;
+  transition: var(--transition-bounce) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  font-weight: 500 !important;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: var(--transition-smooth);
+  z-index: -1;
+}
+
+.btn:hover {
+  transform: translateY(-2px) scale(1.05) !important;
+  box-shadow: var(--glass-shadow-hover) !important;
+}
+
+.btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.98) !important;
+}
+
+/* === Primary Button Enhancements === */
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-700) 100%) !important;
+  border: none !important;
+  color: white !important;
+  box-shadow: 0 4px 16px rgba(72, 127, 255, 0.3) !important;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-800) 100%) !important;
+  box-shadow: 0 8px 24px rgba(72, 127, 255, 0.4) !important;
+}
+
+/* === Enhanced Navigation Bar === */
+.navbar {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border-bottom: 1px solid var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
+  transition: var(--transition-smooth) !important;
+}
+
+.navbar.scrolled {
+  background: var(--glass-bg-secondary) !important;
+  backdrop-filter: var(--glass-blur-strong) !important;
+  -webkit-backdrop-filter: var(--glass-blur-strong) !important;
+}
+
+/* === Enhanced Form Elements === */
+.form-control {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: var(--radius-lg) !important;
+  transition: var(--transition-smooth) !important;
+  color: var(--text-primary-light) !important;
+}
+
+.form-control:focus {
+  background: var(--glass-bg-secondary) !important;
+  border-color: var(--primary-500) !important;
+  box-shadow: 0 0 0 3px rgba(72, 127, 255, 0.1) !important;
+  transform: scale(1.02) !important;
+}
+
+.form-control::placeholder {
+  color: var(--text-secondary-light) !important;
+  opacity: 0.7 !important;
+}
+
+/* === Enhanced Dropdowns === */
+.dropdown-menu {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: var(--radius-xl) !important;
+  box-shadow: var(--glass-shadow-hover) !important;
+  padding: var(--spacing-sm) !important;
+}
+
+.dropdown-item {
+  border-radius: var(--radius-md) !important;
+  transition: var(--transition-smooth) !important;
+  margin: var(--spacing-xs) 0 !important;
+}
+
+.dropdown-item:hover {
+  background: var(--glass-bg-secondary) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  transform: translateX(4px) !important;
+}
+
+/* === Enhanced Tables === */
+.table {
+  background: transparent !important;
+}
+
+.table thead th {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border: none !important;
+  color: var(--text-primary-light) !important;
+  font-weight: 600 !important;
+  padding: var(--spacing-lg) !important;
+}
+
+.table tbody tr {
+  transition: var(--transition-smooth) !important;
+}
+
+.table tbody tr:hover {
+  background: var(--glass-bg-secondary) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  transform: scale(1.01) !important;
+}
+
+.table tbody td {
+  border-color: var(--glass-border) !important;
+  padding: var(--spacing-lg) !important;
+  vertical-align: middle !important;
+}
+
+/* === Enhanced Modals === */
+.modal-content {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur-strong) !important;
+  -webkit-backdrop-filter: var(--glass-blur-strong) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: var(--radius-2xl) !important;
+  box-shadow: var(--glass-shadow-hover) !important;
+  animation: modalSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-backdrop {
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
+/* === Enhanced Alerts === */
+.alert {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: var(--radius-xl) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.alert::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+/* === Floating Action Buttons === */
+.fab {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border: 1px solid var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-bounce) !important;
+  z-index: 1000;
+}
+
+.fab:hover {
+  transform: scale(1.1) rotate(180deg) !important;
+  box-shadow: var(--glass-shadow-hover) !important;
+}
+
+/* === Enhanced Badges === */
+.badge {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: var(--radius-full) !important;
+  font-weight: 500 !important;
+  padding: var(--spacing-xs) var(--spacing-sm) !important;
+  transition: var(--transition-smooth) !important;
+}
+
+.badge:hover {
+  transform: scale(1.05) !important;
+}
+
+/* === Enhanced Progress Bars === */
+.progress {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: var(--radius-full) !important;
+  overflow: hidden !important;
+  height: 12px !important;
+}
+
+.progress-bar {
+  background: linear-gradient(90deg, var(--primary-500) 0%, var(--primary-700) 100%) !important;
+  border-radius: var(--radius-full) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.progress-bar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%);
+  animation: progressShine 2s infinite;
+}
+
+@keyframes progressShine {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* === Enhanced Tooltips === */
+.tooltip .tooltip-inner {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: var(--radius-md) !important;
+  color: var(--text-primary-light) !important;
+  font-weight: 500 !important;
+  padding: var(--spacing-sm) var(--spacing-md) !important;
+}
+
+/* === Floating Elements Animation === */
+.floating {
+  animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+/* === Pulse Animation for Interactive Elements === */
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* === Glow Effects === */
+.glow {
+  box-shadow: 0 0 20px rgba(72, 127, 255, 0.3) !important;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 20px rgba(72, 127, 255, 0.3); }
+  to { box-shadow: 0 0 30px rgba(72, 127, 255, 0.5); }
+}
+
+/* === Enhanced List Groups === */
+.list-group-item {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: var(--radius-lg) !important;
+  margin-bottom: var(--spacing-xs) !important;
+  transition: var(--transition-smooth) !important;
+}
+
+.list-group-item:hover {
+  transform: translateX(8px) scale(1.02) !important;
+  box-shadow: var(--glass-shadow) !important;
+}
+
+/* === Custom Scrollbar with Glassmorphism === */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--glass-bg);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--glass-border);
+  border-radius: var(--radius-full);
+  transition: var(--transition-smooth);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-500);
+}
+
+/* === Responsive Enhancements === */
+@media (max-width: 768px) {
+  .card {
+    border-radius: var(--radius-lg) !important;
+  }
+  
+  .sidebar {
+    backdrop-filter: var(--glass-blur-strong) !important;
+    -webkit-backdrop-filter: var(--glass-blur-strong) !important;
+  }
+  
+  .fab {
+    bottom: 1rem;
+    right: 1rem;
+    width: 48px;
+    height: 48px;
+  }
+}
+
+/* === Special Effect Classes === */
+.glass-effect {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: var(--radius-xl) !important;
+  box-shadow: var(--glass-shadow) !important;
+}
+
+.liquid-gradient {
+  background: var(--liquid-gradient-2) !important;
+}
+
+.modern-hover:hover {
+  transform: translateY(-4px) scale(1.02) !important;
+  box-shadow: var(--glass-shadow-hover) !important;
+  transition: var(--transition-smooth) !important;
+}
+
+/* === Loading Animations === */
+.loading-shimmer {
+  background: linear-gradient(90deg, 
+    var(--glass-bg) 25%, 
+    var(--glass-bg-secondary) 50%, 
+    var(--glass-bg) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* === Text Effects === */
+.text-gradient {
+  background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-700) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 600;
+}
+
+/* === Interactive Elements === */
+.interactive {
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  user-select: none;
+}
+
+.interactive:hover {
+  transform: scale(1.05);
+}
+
+.interactive:active {
+  transform: scale(0.95);
+}
+
+/* === Grid and Layout Enhancements === */
+.modern-grid {
+  display: grid;
+  gap: var(--spacing-lg);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.modern-flex {
+  display: flex;
+  gap: var(--spacing-lg);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* === Enhanced Typography === */
+.modern-title {
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-700) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: var(--spacing-lg);
+}
+
+.modern-subtitle {
+  font-weight: 500;
+  color: var(--text-secondary-light);
+  opacity: 0.8;
+  margin-bottom: var(--spacing-md);
+}
